@@ -4,4 +4,9 @@
 
 Please make sure you have the newest Gradle (>v6) version installed if you run the `gradle wrapper` task.
 
+== Gradle Kotlin Dsl
+
+This project uses the gradle kotlin dsl. We'll just shorten that to kradle though. The Dsl has been around for a long time but is not widespread. You can find lots of official link:https://github.com/gradle/kotlin-dsl-samples/tree/master/samples[Gradle Kotlin Dsl Samples] online.
+
+
 
