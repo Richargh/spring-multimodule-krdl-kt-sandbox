@@ -1,3 +1,3 @@
 rootProject.name = "spring-multibuild-components"
 
-include("catalogue", "factory")
+include("factory", "catalogue", "catalogue_api", "shared_kernel")

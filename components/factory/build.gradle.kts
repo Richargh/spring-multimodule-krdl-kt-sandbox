@@ -6,6 +6,10 @@ plugins {
 }
 
 dependencies {
+    implementation(project(":catalogue_api"))
+    implementation(project(":shared_kernel"))
+    testImplementation(project(":shared_kernel", "testArchive"))
+
     implementation(kotlin("reflect"))
     implementation(kotlin("stdlib-jdk8"))
 
