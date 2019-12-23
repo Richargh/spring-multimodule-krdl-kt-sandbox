@@ -1,3 +1,5 @@
+import org.springframework.boot.gradle.tasks.bundling.BootJar
+
 plugins {
     id("org.springframework.boot")
 
@@ -5,11 +7,15 @@ plugins {
     kotlin("plugin.spring")
 }
 
+tasks.getByName<BootJar>("bootJar") {
+    enabled = false
+}
+
 dependencies {
     /** Project dependencies **/
-    implementation(project(":catalogue_api"))
-    implementation(project(":shared_kernel"))
-    testImplementation(project(":shared_kernel", "testArchive"))
+    implementation(project(":components:catalogue_api"))
+    implementation(project(":components:shared_kernel"))
+    testImplementation(project(":components:shared_kernel", "testArchive"))
 
     /** Language dependencies **/
     implementation(kotlin("reflect"))

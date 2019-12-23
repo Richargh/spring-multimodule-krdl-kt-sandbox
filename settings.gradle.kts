@@ -1,4 +1,11 @@
 rootProject.name = "spring-multibuild"
 
-includeBuild("applications")
-includeBuild("components")
+include(
+        "applications:margarita")
+
+include(
+        "components:factory",
+        "components:catalogue",
+        "components:catalogue_api",
+        "components:shared_kernel")
+

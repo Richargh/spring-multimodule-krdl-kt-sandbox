@@ -7,7 +7,6 @@ class FooTest{
     @Unit @Test
     fun `tests nothing`(){
         // arrange
-        val money = Urls()
 
         // act
 

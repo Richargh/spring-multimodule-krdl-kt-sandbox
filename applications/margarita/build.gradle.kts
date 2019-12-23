@@ -7,14 +7,16 @@ plugins {
 
 dependencies {
     /** Project dependencies **/
-
+    implementation(project(":components:catalogue"))
 
     /** Language dependencies **/
     implementation(kotlin("reflect"))
     implementation(kotlin("stdlib-jdk8"))
 
     /** Main dependencies **/
+    implementation("org.springframework.boot:spring-boot-autoconfigure")
     implementation("org.springframework.boot:spring-boot-starter-web")
+    implementation("org.springframework.boot:spring-boot-starter-thymeleaf")
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
 
     runtimeOnly("com.h2database:h2:1.4.200") // See https://github.com/spring-projects/spring-boot/issues/18593 and https://github.com/h2database/h2database/issues/1841
