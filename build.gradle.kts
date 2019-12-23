@@ -1,3 +1,4 @@
+import io.spring.gradle.dependencymanagement.dsl.DependencyManagementExtension
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
@@ -28,9 +29,19 @@ subprojects {
     apply {
         plugin("io.spring.dependency-management")
     }
+    the<DependencyManagementExtension>().apply {
+        imports {
+            mavenBom(org.springframework.boot.gradle.plugin.SpringBootPlugin.BOM_COORDINATES)
+        }
+    }
 
     tasks.withType<Test> {
         useJUnitPlatform()
+        testLogging {
+            showExceptions = true
+            showStandardStreams = true
+//            events(PASSED, SKIPPED, FAILED)
+        }
     }
 }
 

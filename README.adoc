@@ -1,5 +1,9 @@
 = Spring Multibuild Sandbox
 
+== Usage
+
+Build complete project `./gradlew build` or run individual projects `./gradlew :applications:margarita:bootRun`
+
 == Wrapper
 
 Please make sure you have the newest Gradle (>v6) version installed if you run the `gradle wrapper` task.

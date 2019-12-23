@@ -1,3 +1,5 @@
+import org.springframework.boot.gradle.tasks.run.BootRun
+
 plugins {
     id("org.springframework.boot")
 
@@ -8,6 +10,7 @@ plugins {
 dependencies {
     /** Project dependencies **/
     implementation(project(":components:catalogue"))
+    implementation(project(":components:factory"))
 
     /** Language dependencies **/
     implementation(kotlin("reflect"))
@@ -32,3 +35,6 @@ dependencies {
     testImplementation("com.ninja-squad:springmockk:1.1.3")
 }
 
+springBoot {
+    mainClassName = "de.richargh.sandbox.spring.multibuild.margarita.MargaritaKt"
+}

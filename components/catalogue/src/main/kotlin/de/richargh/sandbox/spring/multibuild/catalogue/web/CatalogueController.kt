@@ -11,8 +11,8 @@ import org.springframework.web.servlet.ModelAndView
 class CatalogueController {
 
     @GetMapping(Urls.Catalogue.index)
-    fun index(): String {
-        return "Catalogue"
+    fun index(): ModelAndView {
+        return ModelAndView("catalogue")
     }
 
     @GetMapping(Urls.Catalogue.availablePizzaTypes, headers = ["Accept=application/json"])

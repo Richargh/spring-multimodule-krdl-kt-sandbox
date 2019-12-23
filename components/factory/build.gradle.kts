@@ -7,9 +7,12 @@ plugins {
     kotlin("plugin.spring")
 }
 
-tasks.getByName<BootJar>("bootJar") {
-    enabled = false
-}
+//val developmentOnly by configurations.creating
+//configurations {
+//    runtimeClasspath {
+//        extendsFrom(developmentOnly)
+//    }
+//}
 
 dependencies {
     /** Project dependencies **/
@@ -38,3 +41,11 @@ dependencies {
     testImplementation("com.ninja-squad:springmockk:1.1.3")
 }
 
+// do not build an executable jar, this is a library
+tasks.getByName<BootJar>("bootJar") {
+    enabled = false
+}
+
+val jar by tasks.getting(Jar::class) {
+    enabled = true
+}
