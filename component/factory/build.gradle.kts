@@ -16,9 +16,9 @@ plugins {
 
 dependencies {
     /** Project dependencies **/
-    implementation(project(":components:catalogue_api"))
-    implementation(project(":components:shared_kernel"))
-    testImplementation(project(":components:shared_kernel", "testArchive"))
+    implementation(project(":component:catalogue-api"))
+    implementation(project(":component:shared-kernel"))
+    testImplementation(project(":component:shared-kernel", "testArchive"))
 
     /** Language dependencies **/
     implementation(kotlin("reflect"))

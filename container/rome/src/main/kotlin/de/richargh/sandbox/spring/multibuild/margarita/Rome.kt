@@ -12,13 +12,13 @@ import org.springframework.context.annotation.PropertySource
 
     "de.richargh.sandbox.spring.multibuild.margarita"
 ])
-@PropertySource("classpath:application-margarita.properties")
-class Margarita
+@PropertySource("classpath:application-rome.properties")
+class Rome
 
 fun main(args: Array<String>){
     val catalogueController = CatalogueController()
 //    val factoryController = FactoryController()
-    val applicationContext = runApplication<Margarita>(*args){
+    val applicationContext = runApplication<Rome>(*args){
 
     }
     applicationContext.containsBean("CatalogueController")

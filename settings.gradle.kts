@@ -1,11 +1,10 @@
 rootProject.name = "spring-multibuild"
 
 include(
-        "applications:margarita")
+        "container:rome")
 
 include(
-        "components:factory",
-        "components:catalogue",
-        "components:catalogue_api",
-        "components:shared_kernel")
-
+        "component:factory",
+        "component:catalogue",
+        "component:catalogue-api",
+        "component:shared-kernel")
