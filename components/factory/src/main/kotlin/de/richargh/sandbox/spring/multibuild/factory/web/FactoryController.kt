@@ -1,4 +1,4 @@
-package de.richargh.sandbox.spring.multibuild.catalogue
+package de.richargh.sandbox.spring.multibuild.factory.web
 
 import org.springframework.stereotype.Controller
 import org.springframework.web.bind.annotation.GetMapping
@@ -6,12 +6,12 @@ import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.servlet.ModelAndView
 
 @Controller
-@RequestMapping(value = ["/catalogue"])
-class CatalogueController {
+@RequestMapping(value = ["/factory"])
+class FactoryController {
 
     @GetMapping("/")
     fun index(): ModelAndView {
-        return ModelAndView("catalogue")
+        return ModelAndView("factory")
     }
 }
 
