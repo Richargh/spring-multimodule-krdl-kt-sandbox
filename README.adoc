@@ -1,4 +1,17 @@
-= Spring Multibuild Sandbox
+= Spring Multimodule Sandbox
+
+This project shows how to use Spring in a multi-module setting.
+
+*Features*
+
+* Spring Boot
+* Spring Functional Bean Definition Dsl
+* Gradle Kotlin Dsl. We shorten that to kradle though.
+
+The project imagines you want to produce pizza. For that you need a *catalogue* of all possible ingredients and a *factory* with an inventory that can make pizzas. The structure follows the ideas from the link:http://c4model.com/[C4 Model].
+
+* Containers are things that are running, spring containers in our case. Named after italian cities, naturally.
+* Components are collections of classes, that have the same overall purpose.
 
 == Usage
 
@@ -9,8 +22,6 @@ Build complete project `./gradlew build` or run individual projects `./gradlew :
 Please make sure you have the newest Gradle (>v6) version installed if you run the `gradle wrapper` task.
 
 == Gradle Kotlin Dsl
-
-This project uses the gradle kotlin dsl. We'll just shorten that to kradle though.
 
 * You can find lots of official link:https://github.com/gradle/kotlin-dsl-samples/tree/master/samples[Gradle Kotlin Dsl Samples] online
 * The official docs provide a link:https://guides.gradle.org/migrating-build-logic-from-groovy-to-kotlin/[Migration Guide] from Groovy to Kotlin
