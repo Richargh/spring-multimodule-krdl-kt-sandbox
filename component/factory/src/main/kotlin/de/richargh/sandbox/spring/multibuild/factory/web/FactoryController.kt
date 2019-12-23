@@ -1,5 +1,6 @@
 package de.richargh.sandbox.spring.multibuild.factory.web
 
+import de.richargh.sandbox.spring.multibuild.shared_web.Urls
 import org.springframework.stereotype.Controller
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.servlet.ModelAndView
@@ -12,5 +13,3 @@ class FactoryController {
         return ModelAndView("factory")
     }
 }
-
-private operator fun ModelAndView.set(key: String, value: Any) = this.addObject(key, value)

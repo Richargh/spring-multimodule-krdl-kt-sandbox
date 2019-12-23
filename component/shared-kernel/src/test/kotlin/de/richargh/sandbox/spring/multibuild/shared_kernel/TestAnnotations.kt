@@ -1,4 +1,4 @@
-package de.richargh.sandbox.spring.multibuild.factory
+package de.richargh.sandbox.spring.multibuild.shared_kernel
 
 import org.junit.jupiter.api.Tag
 import org.junit.jupiter.api.Tags

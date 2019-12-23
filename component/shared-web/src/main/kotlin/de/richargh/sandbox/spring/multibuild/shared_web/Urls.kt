@@ -1,4 +1,4 @@
-package de.richargh.sandbox.spring.multibuild.factory.web
+package de.richargh.sandbox.spring.multibuild.shared_web
 
 object Urls {
     object Catalogue {

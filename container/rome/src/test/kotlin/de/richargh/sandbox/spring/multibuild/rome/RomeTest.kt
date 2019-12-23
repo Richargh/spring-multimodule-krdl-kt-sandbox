@@ -1,9 +1,10 @@
-package de.richargh.sandbox.spring.multibuild.factory
+package de.richargh.sandbox.spring.multibuild.rome
 
 import org.junit.jupiter.api.Test
 
-class FooTest{
-    @Unit @Test
+class RomeTest {
+
+    @Test
     fun `tests nothing`(){
         // arrange
 

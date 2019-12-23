@@ -10,6 +10,7 @@ plugins {
 dependencies {
     /** Project dependencies **/
     implementation(project(":component:catalogue-api"))
+    implementation(project(":component:shared-web"))
     implementation(project(":component:shared-kernel"))
     testImplementation(project(":component:shared-kernel", "testArchive"))
 

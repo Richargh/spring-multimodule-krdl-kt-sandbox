@@ -2,7 +2,7 @@ package de.richargh.sandbox.spring.multibuild.catalogue.web
 
 import de.richargh.sandbox.spring.multibuild.catalogue.api.PizzaType
 import de.richargh.sandbox.spring.multibuild.catalogue.api.Vegetarian
-import de.richargh.sandbox.spring.multibuild.factory.web.Urls
+import de.richargh.sandbox.spring.multibuild.shared_web.Urls
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RestController
 import org.springframework.web.servlet.ModelAndView

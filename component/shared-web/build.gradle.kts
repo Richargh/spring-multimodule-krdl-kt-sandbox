@@ -9,9 +9,7 @@ plugins {
 
 dependencies {
     /** Project dependencies **/
-    implementation(project(":component:catalogue_api"))
-    implementation(project(":component:shared_kernel"))
-    testImplementation(project(":component:shared_kernel", "testArchive"))
+    // none
 
     /** Language dependencies **/
     implementation(kotlin("reflect"))
@@ -19,10 +17,6 @@ dependencies {
 
     /** Main dependencies **/
     implementation("org.springframework.boot:spring-boot-starter-web")
-    implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
-
-    runtimeOnly("com.h2database:h2:1.4.200") // See https://github.com/spring-projects/spring-boot/issues/18593 and https://github.com/h2database/h2database/issues/1841
-    runtimeOnly("org.springframework.boot:spring-boot-devtools")
 
     /** Test dependencies **/
     testImplementation("org.springframework.boot:spring-boot-starter-test") {

@@ -1,4 +1,4 @@
-package de.richargh.sandbox.spring.multibuild.margarita
+package de.richargh.sandbox.spring.multibuild.rome
 
 import de.richargh.sandbox.spring.multibuild.catalogue.web.CatalogueController
 //import de.richargh.sandbox.spring.multibuild.factory.web.FactoryController
