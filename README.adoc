@@ -17,15 +17,18 @@ The project imagines you want to produce pizza. For that you need a *catalogue* 
 
 Build complete project `./gradlew build` or run individual projects `./gradlew :applications:margarita:bootRun`
 
-== Wrapper
+== Tech
+
+=== Wrapper
 
 Please make sure you have the newest Gradle (>v6) version installed if you run the `gradle wrapper` task.
 
-== Gradle Kotlin Dsl
+=== Gradle Kotlin Dsl
 
 * You can find lots of official link:https://github.com/gradle/kotlin-dsl-samples/tree/master/samples[Gradle Kotlin Dsl Samples] online
 * The official docs provide a link:https://guides.gradle.org/migrating-build-logic-from-groovy-to-kotlin/[Migration Guide] from Groovy to Kotlin
 * There is also the link:https://docs.gradle.org/current/userguide/kotlin_dsl.html[Gradle Kotlin DSL User Guide] to consider.
 
+=== Spring Kotlin Bean DSL
 
-
+The Spring Kotlin Bean DSL was introduced with Spring 5. An excellent resource if you want to migrate to the new dsl is link:https://blog.frankel.ch/spring-boot-migrating-functional/[Spring Boot, migrating to functional].
