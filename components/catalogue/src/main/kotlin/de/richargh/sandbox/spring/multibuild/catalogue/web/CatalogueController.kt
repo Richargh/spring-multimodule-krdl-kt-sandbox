@@ -1,17 +1,24 @@
 package de.richargh.sandbox.spring.multibuild.catalogue.web
 
-import org.springframework.stereotype.Controller
+import de.richargh.sandbox.spring.multibuild.catalogue.api.PizzaType
+import de.richargh.sandbox.spring.multibuild.catalogue.api.Vegetarian
+import de.richargh.sandbox.spring.multibuild.factory.web.Urls
 import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.RequestMapping
+import org.springframework.web.bind.annotation.RestController
 import org.springframework.web.servlet.ModelAndView
 
-@Controller
-@RequestMapping(value = ["/catalogue"])
+@RestController
 class CatalogueController {
 
-    @GetMapping("/")
+    @GetMapping(Urls.Catalogue.index)
     fun index(): ModelAndView {
         return ModelAndView("catalogue")
+    }
+
+    @GetMapping(Urls.Catalogue.availablePizzaTypes, headers = ["Accept=application/json"])
+    fun availablePizzaTypes(): List<PizzaType> {
+        // static list, this is just a sandbox after all
+        return listOf(Vegetarian)
     }
 }
 

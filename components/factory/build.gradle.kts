@@ -6,7 +6,7 @@ plugins {
 }
 
 dependencies {
-    /** project dependencies **/
+    /** Project dependencies **/
     implementation(project(":catalogue_api"))
     implementation(project(":shared_kernel"))
     testImplementation(project(":shared_kernel", "testArchive"))

@@ -9,6 +9,11 @@ dependencies {
     /** Project dependencies **/
     implementation(project(":catalogue_api"))
     implementation(project(":shared_kernel"))
+    testImplementation(project(":shared_kernel", "testArchive"))
+
+    /** Project dependencies **/
+    implementation(project(":catalogue_api"))
+    implementation(project(":shared_kernel"))
 
     /** Language dependencies **/
     implementation(kotlin("reflect"))

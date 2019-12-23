@@ -2,14 +2,12 @@ package de.richargh.sandbox.spring.multibuild.factory.web
 
 import org.springframework.stereotype.Controller
 import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.servlet.ModelAndView
 
 @Controller
-@RequestMapping(value = ["/factory"])
 class FactoryController {
 
-    @GetMapping("/")
+    @GetMapping(Urls.Factory.index)
     fun index(): ModelAndView {
         return ModelAndView("factory")
     }

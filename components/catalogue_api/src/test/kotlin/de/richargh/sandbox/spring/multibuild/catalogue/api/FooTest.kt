@@ -1,4 +1,4 @@
-package de.richargh.sandbox.spring.multibuild.factory
+package de.richargh.sandbox.spring.multibuild.catalogue.api
 
 import org.junit.jupiter.api.Test
 
