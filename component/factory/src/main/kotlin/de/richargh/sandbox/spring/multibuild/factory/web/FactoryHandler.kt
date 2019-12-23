@@ -4,5 +4,6 @@ import org.springframework.web.servlet.function.ServerRequest
 import org.springframework.web.servlet.function.ServerResponse
 
 class FactoryHandler {
-    fun index(request: ServerRequest) = ServerResponse.ok().body("Sup")
+    fun index(request: ServerRequest) =
+            ServerResponse.ok().body("factory")
 }
