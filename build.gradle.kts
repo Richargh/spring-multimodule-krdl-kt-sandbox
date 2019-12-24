@@ -14,6 +14,7 @@ allprojects {
 
     repositories {
         mavenCentral()
+        maven("https://repo.spring.io/milestone")
     }
 
     tasks.withType<KotlinCompile> {

@@ -32,3 +32,5 @@ Please make sure you have the newest Gradle (>v6) version installed if you run t
 === Spring Kotlin Bean DSL
 
 The Spring Kotlin Bean DSL was introduced with Spring 5. An excellent resource if you want to migrate to the new dsl is link:https://blog.frankel.ch/spring-boot-migrating-functional/[Spring Boot, migrating to functional].
+
+link:https://spring.io/blog/2019/01/21/manual-bean-definitions-in-spring-boot[Manual AutoConfiguration Defintions] are a thing in Spring.

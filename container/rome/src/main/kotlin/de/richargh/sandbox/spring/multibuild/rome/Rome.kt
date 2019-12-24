@@ -1,25 +1,34 @@
 package de.richargh.sandbox.spring.multibuild.rome
 
 import de.richargh.sandbox.spring.multibuild.catalogue.config.catalogueBeans
+import de.richargh.sandbox.spring.multibuild.catalogue.web.CatalogueHandler
+import de.richargh.sandbox.spring.multibuild.catalogue.web.catalogueRoutes
 import de.richargh.sandbox.spring.multibuild.factory.config.factoryBeans
-import org.springframework.boot.autoconfigure.SpringBootApplication
+import de.richargh.sandbox.spring.multibuild.factory.web.FactoryHandler
+import de.richargh.sandbox.spring.multibuild.factory.web.factoryRoutes
+import de.richargh.sandbox.spring.multibuild.shared_web.config.sharedWebBeans
+import org.springframework.boot.WebApplicationType
 import org.springframework.boot.runApplication
 import org.springframework.context.annotation.PropertySource
+import org.springframework.fu.kofu.application
+import org.springframework.fu.kofu.webmvc.webMvc
 
-@SpringBootApplication(scanBasePackages = [
-    "de.richargh.sandbox.spring.multibuild.catalogue",
-    "de.richargh.sandbox.spring.multibuild.factory",
-
-    "de.richargh.sandbox.spring.multibuild.margarita"
-])
 @PropertySource("classpath:application-rome.properties")
 class Rome
 
-fun main(args: Array<String>){
-//    val catalogueController = CatalogueController()
-//    val factoryController = FactoryController()
-    runApplication<Rome>(*args){
-        addInitializers(catalogueBeans())
-        addInitializers(factoryBeans())
+val app = application(WebApplicationType.SERVLET) {
+    sharedWebBeans()
+    catalogueBeans()
+    factoryBeans()
+    webMvc {
+        port = 8081
+        router {
+            catalogueRoutes(CatalogueHandler())
+            factoryRoutes(FactoryHandler())
+        }
     }
+}
+
+fun main(args: Array<String>){
+    app.run(args)
 }

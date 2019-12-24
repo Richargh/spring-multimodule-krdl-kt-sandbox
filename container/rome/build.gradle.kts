@@ -9,6 +9,7 @@ plugins {
 
 dependencies {
     /** Project dependencies **/
+    implementation(project(":component:shared-web"))
     implementation(project(":component:catalogue"))
     implementation(project(":component:factory"))
 
@@ -17,6 +18,7 @@ dependencies {
     implementation(kotlin("stdlib-jdk8"))
 
     /** Main dependencies **/
+    implementation("org.springframework.fu:spring-fu-kofu:0.2.2")
     implementation("org.springframework.boot:spring-boot-autoconfigure")
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("org.springframework.boot:spring-boot-starter-thymeleaf")
