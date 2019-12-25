@@ -19,6 +19,15 @@ Build complete project `./gradlew build` or run individual projects `./gradlew :
 
 == Gradle
 
+Gradle built system has two major building blocks
+
+1. project
+2. task
+
+A Gradle build system is made up of one or more projects and each project contains one or more tasks. A project in Gradle is an abstract concept that represents an artifact that needs to be built.
+
+
+
 === Wrapper
 
 Please make sure you have the newest Gradle (>v6) version installed if you run the `gradle wrapper` task.

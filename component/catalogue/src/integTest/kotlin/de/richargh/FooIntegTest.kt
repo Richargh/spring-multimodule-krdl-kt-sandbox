@@ -1,8 +1,9 @@
-package de.richargh.sandbox.spring.multibuild.catalogue
+package de.richargh
 
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.fail
 
-class FooTest{
+class FooIntegTest{
     @Test
     fun `tests nothing`(){
         // arrange
@@ -10,6 +11,6 @@ class FooTest{
         // act
 
         // assert
-//        fail("expected")
+        fail("expected")
     }
 }
