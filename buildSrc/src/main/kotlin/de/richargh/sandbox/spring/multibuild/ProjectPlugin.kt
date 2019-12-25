@@ -13,31 +13,31 @@ open class ProjectPlugin: Plugin<Project> {
     var logger = Logging.getLogger(javaClass)
 
     override fun apply(project: Project) {
-        //        project.getTasks().create("hello", HelloTask::class.java)
         logger.lifecycle("start")
-        project.createTestType("integTest")
+        project.createTestType("mediumTest")
+        project.createTestType("largeTest")
     }
 
-    private fun Project.createTestType(srcFolder: String) {
-        val sourceSets = project.extensions.findByType(SourceSetContainer::class.java)
+    private fun Project.createTestType(testType: String) {
+        val sourceSets = extensions.findByType(SourceSetContainer::class.java)
         if (sourceSets == null) {
             logger.lifecycle("Couldn't find source sets")
         } else {
-            sourceSets.create(srcFolder) {
+            sourceSets.create(testType) {
                 compileClasspath += sourceSets["main"].output + configurations["testRuntimeClasspath"]
                 runtimeClasspath += output + compileClasspath
             }
 
-            tasks.register<Test>("integTest") {
+            tasks.register<Test>(testType) {
                 description = "Runs the integration tests."
                 group = "verification"
-                testClassesDirs = sourceSets[srcFolder].output.classesDirs
-                classpath = sourceSets[srcFolder].runtimeClasspath
+                testClassesDirs = sourceSets[testType].output.classesDirs
+                classpath = sourceSets[testType].runtimeClasspath
                 mustRunAfter(tasks["test"])
             }
 
             tasks.named("check") {
-                dependsOn(srcFolder)
+                dependsOn(testType)
             }
         }
     }
