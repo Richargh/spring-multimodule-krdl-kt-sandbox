@@ -29,11 +29,13 @@ open class ProjectPlugin: Plugin<Project> {
             }
 
             tasks.register<Test>(testType) {
-                description = "Runs the integration tests."
+                description = "Runs the $testType tests."
                 group = "verification"
                 testClassesDirs = sourceSets[testType].output.classesDirs
                 classpath = sourceSets[testType].runtimeClasspath
                 mustRunAfter(tasks["test"])
+
+                useJUnitPlatform()
             }
 
             tasks.named("check") {
@@ -41,9 +43,4 @@ open class ProjectPlugin: Plugin<Project> {
             }
         }
     }
-}
-
-enum class TestType(val prefix: String, val executers: List<String>, val libRepoRequired: Boolean) {
-    INTEGRATION("integ", listOf("embedded", "forking", "noDaemon", "parallel", "instant", "vfsRetention"), false),
-    CROSSVERSION("crossVersion", listOf("embedded", "forking"), true)
 }

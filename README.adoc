@@ -15,7 +15,10 @@ The project imagines you want to produce pizza. For that you need a *catalogue* 
 
 == Usage
 
-Build complete project `./gradlew build` or run individual projects `./gradlew :container:rome:bootRun`
+* Build complete project `./gradlew build`
+* Run individual project `./gradlew :container:rome:bootRun`
+* Test only medium tests `./gradlew mediumTest`
+* List available tasks `./gradlew tasks`
 
 == Gradle
 

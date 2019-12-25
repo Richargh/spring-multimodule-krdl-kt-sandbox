@@ -6,6 +6,7 @@ plugins {
     id("io.spring.dependency-management") version "1.0.8.RELEASE" apply false
     kotlin("jvm") version "1.3.50" apply false
     kotlin("plugin.spring") version "1.3.50" apply false
+
 }
 
 allprojects {
@@ -42,48 +43,9 @@ subprojects {
         testLogging {
             showExceptions = true
             showStandardStreams = true
-//            events(PASSED, SKIPPED, FAILED)
+            events("passed", "skipped", "failed")
         }
     }
-
-    val sourceSets = project.extensions.findByType(SourceSetContainer::class.java)
-    if(sourceSets != null) {
-        sourceSets.create("integTest") {
-            compileClasspath += sourceSets["main"].output
-            runtimeClasspath += sourceSets["main"].output
-        }
-
-        tasks.register<Test>("integTest") {
-            description = "Runs the integration tests."
-            group = "verification"
-            testClassesDirs = sourceSets["integTest"].output.classesDirs
-            classpath = sourceSets["integTest"].runtimeClasspath
-            mustRunAfter(tasks["test"])
-        }
-
-        tasks.named("check") {
-            dependsOn("integTest")
-        }
-    }
-
-
-
-
-
-
-
-
-    //    val sourceSets = the<SourceSetContainer>()
-//
-//    sourceSets {
-//    }
-//
-//    val intTestImplementation by configurations.getting {
-//        extendsFrom(configurations.implementation.get())
-//    }
-//
-//    configurations["intTestRuntimeOnly"].extendsFrom(configurations.runtimeOnly.get())
-
 }
 
 tasks.wrapper {
