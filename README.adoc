@@ -17,11 +17,15 @@ The project imagines you want to produce pizza. For that you need a *catalogue* 
 
 Build complete project `./gradlew build` or run individual projects `./gradlew :container:rome:bootRun`
 
-== Tech
+== Gradle
 
 === Wrapper
 
 Please make sure you have the newest Gradle (>v6) version installed if you run the `gradle wrapper` task.
+
+=== Test
+
+The link:https://docs.gradle.org/current/userguide/java_testing.html[JavaTesting Guide] and the official docs for the link:https://docs.gradle.org/current/dsl/org.gradle.api.tasks.testing.Test.html[Test Api].
 
 === Gradle Kotlin Dsl
 
@@ -29,8 +33,26 @@ Please make sure you have the newest Gradle (>v6) version installed if you run t
 * The official docs provide a link:https://guides.gradle.org/migrating-build-logic-from-groovy-to-kotlin/[Migration Guide] from Groovy to Kotlin
 * There is also the link:https://docs.gradle.org/current/userguide/kotlin_dsl.html[Gradle Kotlin DSL User Guide] to consider.
 
+== Spring
+
 === Spring Kotlin Bean DSL
 
 The Spring Kotlin Bean DSL was introduced with Spring 5. An excellent resource if you want to migrate to the new dsl is link:https://blog.frankel.ch/spring-boot-migrating-functional/[Spring Boot, migrating to functional].
 
 link:https://spring.io/blog/2019/01/21/manual-bean-definitions-in-spring-boot[Manual AutoConfiguration Defintions] are a thing in Spring.
+
+=== Spring Fu
+
+link:https://github.com/rodolphocouto/spring-fu-sample/[other sample].
+
+=== Spring Router DSL
+
+link:https://docs.spring.io/spring/docs/current/spring-framework-reference/languages.html#router-dsl[Spring Router DSL].
+
+=== Kotlin Script Templates
+
+link:https://github.com/sdeleuze/kotlin-script-templating[sample project] and link:https://docs.spring.io/spring/docs/current/spring-framework-reference/languages.html#kotlin-script-templates[reference docs].
+
+=== Spring Testing
+
+link:https://docs.spring.io/spring-boot/docs/current/reference/html/appendix-test-auto-configuration.html[Test Auto-configuration Annotations].
