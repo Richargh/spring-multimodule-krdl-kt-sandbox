@@ -5,6 +5,5 @@ import org.springframework.web.servlet.function.ServerResponse
 
 class FactoryHandler {
     fun index(request: ServerRequest) =
-            ServerResponse.ok().body("factory")
-//            ServerResponse.ok().render("factory")
+            ServerResponse.ok().render("factory")
 }

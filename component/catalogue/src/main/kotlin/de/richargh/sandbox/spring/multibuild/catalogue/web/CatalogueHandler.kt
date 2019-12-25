@@ -7,7 +7,7 @@ import org.springframework.web.servlet.function.ServerResponse
 class CatalogueHandler {
 
     fun index(request: ServerRequest) =
-            ServerResponse.ok().body("catalogue")
+            ServerResponse.ok().render("catalogue")
 
     fun availablePizzaTypes(request: ServerRequest) =
             ServerResponse.ok().body(listOf(Vegetarian))

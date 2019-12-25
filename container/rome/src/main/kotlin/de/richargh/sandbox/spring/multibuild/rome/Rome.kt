@@ -11,6 +11,7 @@ import org.springframework.boot.WebApplicationType
 import org.springframework.boot.runApplication
 import org.springframework.context.annotation.PropertySource
 import org.springframework.fu.kofu.application
+import org.springframework.fu.kofu.webmvc.mustache
 import org.springframework.fu.kofu.webmvc.webMvc
 
 @PropertySource("classpath:application-rome.properties")
@@ -25,6 +26,12 @@ val app = application(WebApplicationType.SERVLET) {
         router {
             catalogueRoutes(CatalogueHandler())
             factoryRoutes(FactoryHandler())
+        }
+        mustache {
+//            this.
+        }
+        converters {
+            string()
         }
     }
 }

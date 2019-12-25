@@ -1,6 +1,6 @@
 package de.richargh.sandbox.spring.multibuild.factory
 
-import de.richargh.sandbox.spring.multibuild.factory.web.Urls
+import de.richargh.sandbox.spring.multibuild.shared_kernel.Unit
 import org.junit.jupiter.api.Test
 
 class FooTest{

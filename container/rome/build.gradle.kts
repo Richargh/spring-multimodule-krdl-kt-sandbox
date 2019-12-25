@@ -21,7 +21,6 @@ dependencies {
     implementation("org.springframework.fu:spring-fu-kofu:0.2.2")
     implementation("org.springframework.boot:spring-boot-autoconfigure")
     implementation("org.springframework.boot:spring-boot-starter-web")
-    implementation("org.springframework.boot:spring-boot-starter-thymeleaf")
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
 
     runtimeOnly("com.h2database:h2:1.4.200") // See https://github.com/spring-projects/spring-boot/issues/18593 and https://github.com/h2database/h2database/issues/1841
@@ -38,5 +37,5 @@ dependencies {
 }
 
 springBoot {
-    mainClassName = "de.richargh.sandbox.spring.multibuild.margarita.MargaritaKt"
+    mainClassName = "de.richargh.sandbox.spring.multibuild.rome.RomeKt"
 }
