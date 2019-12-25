@@ -5,6 +5,9 @@ plugins {
 
     kotlin("jvm")
     kotlin("plugin.spring")
+
+    // order is important, apply this buildSrc plugin last
+    id("de.richargh.sandbox.spring.multibuild")
 }
 
 dependencies {

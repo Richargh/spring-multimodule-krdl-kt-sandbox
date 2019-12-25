@@ -2,10 +2,12 @@ import org.springframework.boot.gradle.tasks.bundling.BootJar
 
 plugins {
     id("org.springframework.boot")
-    id("de.richargh.sandbox.spring.multibuild")
 
     kotlin("jvm")
     kotlin("plugin.spring")
+
+    // order is important, apply this buildSrc plugin last
+    id("de.richargh.sandbox.spring.multibuild")
 }
 
 dependencies {

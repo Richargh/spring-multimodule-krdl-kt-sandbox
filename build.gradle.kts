@@ -4,7 +4,6 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 plugins {
     id("org.springframework.boot") version "2.2.2.RELEASE" apply false
     id("io.spring.dependency-management") version "1.0.8.RELEASE" apply false
-    id("de.richargh.sandbox.spring.multibuild")
     kotlin("jvm") version "1.3.50" apply false
     kotlin("plugin.spring") version "1.3.50" apply false
 }
@@ -47,15 +46,36 @@ subprojects {
         }
     }
 
-//    val sourceSets = the<SourceSetContainer>()
+    val sourceSets = project.extensions.findByType(SourceSetContainer::class.java)
+    if(sourceSets != null) {
+        sourceSets.create("integTest") {
+            compileClasspath += sourceSets["main"].output
+            runtimeClasspath += sourceSets["main"].output
+        }
+
+        tasks.register<Test>("integTest") {
+            description = "Runs the integration tests."
+            group = "verification"
+            testClassesDirs = sourceSets["integTest"].output.classesDirs
+            classpath = sourceSets["integTest"].runtimeClasspath
+            mustRunAfter(tasks["test"])
+        }
+
+        tasks.named("check") {
+            dependsOn("integTest")
+        }
+    }
+
+
+
+
+
+
+
+
+    //    val sourceSets = the<SourceSetContainer>()
 //
 //    sourceSets {
-//        create("integTest") {
-//            java.srcDir(file("src/integTest/java"))
-//            resources.srcDir(file("src/integTest/resources"))
-//            compileClasspath += sourceSets["main"].output + configurations["testRuntimeClasspath"]
-//            runtimeClasspath += output + compileClasspath
-//        }
 //    }
 //
 //    val intTestImplementation by configurations.getting {

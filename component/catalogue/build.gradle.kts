@@ -5,6 +5,9 @@ plugins {
 
     kotlin("jvm")
     kotlin("plugin.spring")
+
+    // order is important, apply this buildSrc plugin last
+    id("de.richargh.sandbox.spring.multibuild")
 }
 
 dependencies {
@@ -42,24 +45,4 @@ tasks.getByName<BootJar>("bootJar") {
 
 val jar by tasks.getting(Jar::class) {
     enabled = true
-}
-
-val sourceSets = project.extensions.findByType(SourceSetContainer::class.java)
-if(sourceSets != null) {
-    sourceSets.create("integTest") {
-        compileClasspath += sourceSets["main"].output + configurations["testRuntimeClasspath"]
-        runtimeClasspath += output + compileClasspath
-    }
-
-    tasks.register<Test>("integTest") {
-        description = "Runs the integration tests."
-        group = "verification"
-        testClassesDirs = sourceSets["integTest"].output.classesDirs
-        classpath = sourceSets["integTest"].runtimeClasspath
-        mustRunAfter(tasks["test"])
-    }
-
-    tasks.named("check") {
-        dependsOn("integTest")
-    }
 }
