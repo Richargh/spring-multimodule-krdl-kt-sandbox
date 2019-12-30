@@ -42,7 +42,7 @@ subprojects {
     tasks.withType<Test> {
         println("Configure subproject tests for $name")
         useJUnitPlatform {
-            exclude("excluded")
+            excludeTags("excluded")
         }
         testLogging {
             showExceptions = true
