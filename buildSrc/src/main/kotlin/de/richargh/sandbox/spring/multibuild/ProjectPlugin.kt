@@ -21,8 +21,9 @@ open class ProjectPlugin: Plugin<Project> {
     private fun Project.createTestType(testType: String) {
         val sourceSets = extensions.findByType(SourceSetContainer::class.java)
         if (sourceSets == null) {
-            logger.lifecycle("Couldn't find source sets")
+            logger.lifecycle("Couldn't find source sets in $name")
         } else {
+            logger.lifecycle("Found source sets in $name")
             sourceSets.create(testType) {
                 compileClasspath += sourceSets["main"].output + configurations["testRuntimeClasspath"]
                 runtimeClasspath += output + compileClasspath
@@ -34,8 +35,6 @@ open class ProjectPlugin: Plugin<Project> {
                 testClassesDirs = sourceSets[testType].output.classesDirs
                 classpath = sourceSets[testType].runtimeClasspath
                 mustRunAfter(tasks["test"])
-
-                useJUnitPlatform()
             }
 
             tasks.named("check") {
