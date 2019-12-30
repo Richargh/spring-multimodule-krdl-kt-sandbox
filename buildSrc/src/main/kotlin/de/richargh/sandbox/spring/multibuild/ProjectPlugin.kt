@@ -14,31 +14,31 @@ open class ProjectPlugin: Plugin<Project> {
 
     override fun apply(project: Project) {
         logger.lifecycle("start")
-        project.createTestType("mediumTest")
-        project.createTestType("largeTest")
+        project.createTestset("mediumTest", "test")
+        project.createTestset("largeTest", "mediumTest")
     }
 
-    private fun Project.createTestType(testType: String) {
+    private fun Project.createTestset(testset: String, mustRunAfterTask: String) {
         val sourceSets = extensions.findByType(SourceSetContainer::class.java)
         if (sourceSets == null) {
             logger.lifecycle("Couldn't find source sets in $name")
         } else {
             logger.lifecycle("Found source sets in $name")
-            sourceSets.create(testType) {
+            sourceSets.create(testset) {
                 compileClasspath += sourceSets["main"].output + configurations["testRuntimeClasspath"]
                 runtimeClasspath += output + compileClasspath
             }
 
-            tasks.register<Test>(testType) {
-                description = "Runs the $testType tests."
+            tasks.register<Test>(testset) {
+                description = "Runs the $testset tests."
                 group = "verification"
-                testClassesDirs = sourceSets[testType].output.classesDirs
-                classpath = sourceSets[testType].runtimeClasspath
-                mustRunAfter(tasks["test"])
+                testClassesDirs = sourceSets[testset].output.classesDirs
+                classpath = sourceSets[testset].runtimeClasspath
+                mustRunAfter(tasks[mustRunAfterTask])
             }
 
             tasks.named("check") {
-                dependsOn(testType)
+                dependsOn(testset)
             }
         }
     }
