@@ -17,6 +17,7 @@ dependencies {
     implementation(project(":component:shared-kernel"))
     testImplementation(project(":component:shared-kernel", "testArchive"))
     mediumTestImplementation(project(":component:shared-kernel", "testArchive"))
+    mediumTestImplementation(project(":component:catalogue", "testArchive"))
 
     /** Language dependencies **/
     implementation(kotlin("reflect"))
@@ -46,4 +47,18 @@ tasks.getByName<BootJar>("bootJar") {
 
 val jar by tasks.getting(Jar::class) {
     enabled = true
+}
+
+configurations.register("testArchive") {
+    extendsFrom(configurations.testCompile.get())
+}
+
+tasks.register<Jar>(name = "jarTest") {
+    from(project.sourceSets.test.get().output)
+    description = "create a jar from the test source set"
+    archiveClassifier.set("test")
+}
+
+artifacts {
+    add("testArchive", tasks.getByName("jarTest"))
 }
