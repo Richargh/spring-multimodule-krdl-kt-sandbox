@@ -1,4 +1,4 @@
-package de.richargh
+package de.richargh.sandbox.spring.multibuild.catalogue
 
 //import de.richargh.sandbox.spring.multibuild.catalogue.builder.CatalogueEntryBuilder
 import org.junit.jupiter.api.Assertions
