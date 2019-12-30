@@ -15,6 +15,7 @@ dependencies {
     implementation(project(":component:shared-web"))
     implementation(project(":component:catalogue"))
     implementation(project(":component:factory"))
+    testImplementation(project(":component:shared-kernel", "testArchive"))
 
     /** Language dependencies **/
     implementation(kotlin("reflect"))

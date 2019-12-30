@@ -5,14 +5,10 @@ plugins {
 
     kotlin("jvm")
     kotlin("plugin.spring")
-}
 
-//val developmentOnly by configurations.creating
-//configurations {
-//    runtimeClasspath {
-//        extendsFrom(developmentOnly)
-//    }
-//}
+    // order is important, apply this buildSrc plugin last
+    id("de.richargh.sandbox.spring.multibuild")
+}
 
 dependencies {
     /** Project dependencies **/

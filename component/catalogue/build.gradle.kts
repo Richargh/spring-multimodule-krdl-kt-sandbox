@@ -17,7 +17,6 @@ dependencies {
     implementation(project(":component:shared-kernel"))
     testImplementation(project(":component:shared-kernel", "testArchive"))
     "mediumTestImplementation"(project(":component:shared-kernel", "testArchive"))
-    "largeTestImplementation"(project(":component:shared-kernel", "testArchive"))
 
     /** Language dependencies **/
     implementation(kotlin("reflect"))
