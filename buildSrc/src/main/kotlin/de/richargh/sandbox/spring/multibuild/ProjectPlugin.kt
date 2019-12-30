@@ -23,7 +23,7 @@ open class ProjectPlugin: Plugin<Project> {
         if (sourceSets == null) {
             logger.lifecycle("Couldn't find source sets in $name")
         } else {
-            logger.lifecycle("Found source sets in $name")
+            logger.lifecycle("Found source sets in $displayName")
             sourceSets.create(testset) {
                 compileClasspath += sourceSets["main"].output + configurations["testRuntimeClasspath"]
                 runtimeClasspath += output + compileClasspath
