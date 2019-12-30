@@ -3,9 +3,9 @@ package de.richargh
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.fail
 
-class FooIntegTest{
+class FailLargeTest {
     @Test
-    fun `tests nothing`(){
+    fun `tests nothing`() {
         // arrange
 
         // act

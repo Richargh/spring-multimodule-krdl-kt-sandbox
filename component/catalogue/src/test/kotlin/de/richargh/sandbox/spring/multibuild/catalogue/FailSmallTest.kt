@@ -1,11 +1,14 @@
-package de.richargh
+package de.richargh.sandbox.spring.multibuild.catalogue
 
+import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.fail
 
-class FooIntegTest{
+class FailSmallTest {
+
+    @Disabled
     @Test
-    fun `tests nothing`(){
+    fun `tests nothing`() {
         // arrange
 
         // act
