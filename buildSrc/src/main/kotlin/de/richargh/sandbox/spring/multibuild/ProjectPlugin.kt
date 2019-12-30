@@ -5,6 +5,7 @@ import org.gradle.api.Project
 import org.gradle.api.logging.Logging
 import org.gradle.api.tasks.SourceSetContainer
 import org.gradle.api.tasks.testing.Test
+import org.gradle.kotlin.dsl.DependencyHandlerScope
 import org.gradle.kotlin.dsl.get
 import org.gradle.kotlin.dsl.register
 
@@ -43,3 +44,7 @@ open class ProjectPlugin: Plugin<Project> {
         }
     }
 }
+
+fun DependencyHandlerScope.mediumTestImplementation(dependencyNotation: Any) = "mediumTestImplementation"(dependencyNotation)
+
+fun DependencyHandlerScope.largeTestImplementation(dependencyNotation: Any) = "largeTestImplementation"(dependencyNotation)
