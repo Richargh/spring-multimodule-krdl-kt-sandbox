@@ -1,5 +1,6 @@
 package de.richargh
 
+//import de.richargh.sandbox.spring.multibuild.catalogue.builder.CatalogueEntryBuilder
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test

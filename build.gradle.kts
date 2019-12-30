@@ -40,7 +40,10 @@ subprojects {
     }
 
     tasks.withType<Test> {
-        useJUnitPlatform()
+        println("Configure subproject tests")
+        useJUnitPlatform {
+            exclude("excluded")
+        }
         testLogging {
             showExceptions = true
             showStandardStreams = true
