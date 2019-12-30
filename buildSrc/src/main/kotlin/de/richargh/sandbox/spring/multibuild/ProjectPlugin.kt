@@ -4,6 +4,7 @@ import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.logging.Logging
 import org.gradle.api.tasks.SourceSetContainer
+import org.gradle.api.tasks.bundling.Jar
 import org.gradle.api.tasks.testing.Test
 import org.gradle.kotlin.dsl.DependencyHandlerScope
 import org.gradle.kotlin.dsl.get
@@ -15,8 +16,31 @@ open class ProjectPlugin: Plugin<Project> {
 
     override fun apply(project: Project) {
         logger.lifecycle("start")
+        project.registerTestArchive()
+
         project.createTestset("mediumTest", "test")
         project.createTestset("largeTest", "mediumTest")
+    }
+
+    private fun Project.registerTestArchive() {
+        val sourceSets = extensions.findByType(SourceSetContainer::class.java)
+        if (sourceSets == null) {
+            logger.lifecycle("Couldn't find source sets in $name")
+        } else {
+            configurations.register("testArchive") {
+                extendsFrom(configurations["testCompile"])
+            }
+
+            tasks.register<Jar>(name = "jarTest") {
+                from(sourceSets["test"].output)
+                description = "create a jar from the test source set"
+                archiveClassifier.set("test")
+            }
+
+            artifacts {
+                add("testArchive", tasks.getByName("jarTest"))
+            }
+        }
     }
 
     private fun Project.createTestset(testset: String, mustRunAfterTask: String) {
