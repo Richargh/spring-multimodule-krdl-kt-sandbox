@@ -27,7 +27,7 @@ open class ProjectPlugin: Plugin<Project> {
         if (sourceSets == null) {
             logger.lifecycle("Couldn't find source sets in $name")
         } else {
-            configurations.register("testArchive") {
+            configurations.register(testArchive) {
                 extendsFrom(configurations["testCompile"])
             }
 
@@ -38,7 +38,7 @@ open class ProjectPlugin: Plugin<Project> {
             }
 
             artifacts {
-                add("testArchive", tasks.getByName("jarTest"))
+                add(testArchive, tasks.getByName("jarTest"))
             }
         }
     }
@@ -72,3 +72,5 @@ open class ProjectPlugin: Plugin<Project> {
 fun DependencyHandlerScope.mediumTestImplementation(dependencyNotation: Any) = "mediumTestImplementation"(dependencyNotation)
 
 fun DependencyHandlerScope.largeTestImplementation(dependencyNotation: Any) = "largeTestImplementation"(dependencyNotation)
+
+const val testArchive = "testArchive"

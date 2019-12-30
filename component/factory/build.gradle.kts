@@ -1,3 +1,4 @@
+import de.richargh.sandbox.spring.multibuild.testArchive
 import org.springframework.boot.gradle.tasks.bundling.BootJar
 
 plugins {
@@ -15,7 +16,7 @@ dependencies {
     implementation(project(":component:catalogue-api"))
     implementation(project(":component:shared-web"))
     implementation(project(":component:shared-kernel"))
-    testImplementation(project(":component:shared-kernel", "testArchive"))
+    testImplementation(project(":component:shared-kernel", testArchive))
 
     /** Language dependencies **/
     implementation(kotlin("reflect"))
