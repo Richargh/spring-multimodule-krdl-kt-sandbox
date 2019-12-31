@@ -12,10 +12,9 @@ import org.gradle.kotlin.dsl.register
 
 open class ProjectPlugin: Plugin<Project> {
 
-    var logger = Logging.getLogger(javaClass)
+    private val log = Logging.getLogger(javaClass)
 
     override fun apply(project: Project) {
-        logger.lifecycle("start")
         project.registerTestArchive()
 
         project.createTestset("mediumTest", "test")
@@ -25,7 +24,7 @@ open class ProjectPlugin: Plugin<Project> {
     private fun Project.registerTestArchive() {
         val sourceSets = extensions.findByType(SourceSetContainer::class.java)
         if (sourceSets == null) {
-            logger.lifecycle("Couldn't find source sets in $name")
+            log.error("Couldn't find source sets in $name")
         } else {
             configurations.register(testArchive) {
                 extendsFrom(configurations["testCompile"])
@@ -48,7 +47,6 @@ open class ProjectPlugin: Plugin<Project> {
         if (sourceSets == null) {
             logger.lifecycle("Couldn't find source sets in $name")
         } else {
-            logger.lifecycle("Found source sets in $displayName")
             sourceSets.create(testset) {
                 compileClasspath += sourceSets["main"].output + configurations["testRuntimeClasspath"]
                 runtimeClasspath += output + compileClasspath

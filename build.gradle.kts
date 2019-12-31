@@ -40,7 +40,6 @@ subprojects {
     }
 
     tasks.withType<Test> {
-        println("Configure subproject tests for $name")
         useJUnitPlatform {
             excludeTags("excluded")
         }
