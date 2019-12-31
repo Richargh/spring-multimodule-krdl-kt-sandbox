@@ -116,13 +116,13 @@ link:https://github.com/sdeleuze/kotlin-script-templating[sample project] and li
 
 == Testing
 
-Testing is a divisive topics. What is an unit test, what is an integration test, how many tests per category do we need and how much coverage should they have are regular questions in most teams and clear answers are hard to agree on. This project suggests one possible answer with multiple testsets that each contain multiple types of tests. The answer works under the assumption that we want feedback as fast as possible, especially for the business logic, and that we want to support refactoring as much as possible.
+Testing is a divisive topic. "What is an unit test", "what is an integration test", "how many tests per category do we need" and "how much coverage should they have" are regular questions in most teams and clear answers are hard to agree on. This project suggests one possible answer with multiple testsets that each contain multiple types of tests. The answer works under the assumption that we want feedback as fast as possible, especially for the business logic, and that we want to support refactoring as much as possible.
 
 === Integration Test does not mean anything
 
 link:https://reflectoring.io/spring-boot-test/#integration-tests-vs-unit-tests[Reflectoring.io writes] that an integration test can a) cover multiple "units", b) cover multiple layers, or c) test multiple paths through the application.
 
-Running the test from different category (a) might take a couple of milliseconds, b) hundreds of milliseconds and c) might even take seconds. Also the purpose of these three categories is very different. Thus describing something as an integration test is rather unhelpful. We need a better definition to write better tests. Thankfully there is a lot of good material out there.
+Running the test from different category (a) might take a couple of milliseconds, b) hundreds of milliseconds and c) might even take seconds. In addition to test execution time the purpose of these three categories is also very different. Hence it is not very helpful to describe something as an integration test. We need a better definition to write better tests as a team. Thankfully there is a lot of good material out there which we can build a definition on top of.
 
 === Unit Test
 
@@ -166,14 +166,14 @@ interface Engine {
     // and so on
 }
 ----
-<1> system-under-test (SUT) or testling
+<1> system-under-test (SUT)
 <2> collaborator
 <3> direct output of sut
 <4> direct input of sut
 <5> indirect input of sut
 <6> indirect output of sut
 
-
+image::img/test-double.drawio.png[Test Double Hierarchy]
 
 In his book, link:https://leanpub.com/wewut[Working Effectively with Unit Tests] divides unit tests into social and solitary. Social unit tests can
 
