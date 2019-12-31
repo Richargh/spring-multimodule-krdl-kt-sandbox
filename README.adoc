@@ -22,12 +22,17 @@ The project imagines you want to produce pizza. For that you need a *catalogue* 
 
 == Gradle
 
-Gradle built system has two major building blocks
+The link:https://gradle.org/[Gradle] build tool is an alternative to link:https://maven.apache.org/[Maven]. It's built system consists of two major building blocks
 
 1. project
 2. task
 
-A Gradle build system is made up of one or more projects and each project contains one or more tasks. A project in Gradle is an abstract concept that represents an artifact that needs to be built.
+A Gradle build system is made up of one or more projects and each project contains one or more tasks. A project represents an artifact that needs to be built.
+
+Gradle has a simple link:https://docs.gradle.org/current/userguide/command_line_interface.html[command-line interface].
+
+* View all projects `./gradlew projects`
+* View the available tasks `./gradlew tasks`
 
 === Wrapper
 
@@ -35,11 +40,15 @@ Please make sure you have the newest Gradle (>v6) version installed if you run t
 
 === BuildSrc
 
-BuildSrc is a project in the root of your build. Everything written there will be shared by all your build scripts. We can use buildSrc to write our own gradle tasks, plugins or extensions functions that will be available in all `build.gradle.kts`.
+BuildSrc is a project in the root of your build. Everything written there will be shared by all your build scripts. We can use buildSrc to write our own gradle tasks, plugins or extensions functions that will be available in all `build.gradle.kts`. The gradle team also recommends placing dependency versions there.
+
+BuildSrc Plugins can be applied the same way as regular plugins. We can specify an id alias by placing a properties file in `buildSrc/src/main/resources/META-INF.gradle-plugins`.
 
 === Test
 
-The link:https://docs.gradle.org/current/userguide/java_testing.html[JavaTesting Guide] and the official docs for the link:https://docs.gradle.org/current/dsl/org.gradle.api.tasks.testing.Test.html[Test Api].
+Specifying test and test options is relatively straightforward using gradle. The link:https://docs.gradle.org/current/userguide/java_testing.html[JavaTesting Guide] and the official docs for the link:https://docs.gradle.org/current/dsl/org.gradle.api.tasks.testing.Test.html[Test Api] provide a good starting point. They also help when it comes to defining a more complicated test setup using multiple testsets.
+
+In our case we wrote a custom buildSrc plugin to define multiple testsets that can share code between them. We could have also used the link:https://github.com/unbroken-dome/gradle-testsets-plugin[Gradle TestSets plugin], an example code base can be found link:https://github.com/Richargh/testsets-plugin-krdl-kt-sandbox[here].
 
 === Gradle Kotlin Dsl
 
@@ -51,22 +60,24 @@ The link:https://docs.gradle.org/current/userguide/java_testing.html[JavaTesting
 
 === Spring Kotlin Bean DSL
 
-The Spring Kotlin Bean DSL was introduced with Spring 5. An excellent resource if you want to migrate to the new dsl is link:https://blog.frankel.ch/spring-boot-migrating-functional/[Spring Boot, migrating to functional].
-
-link:https://spring.io/blog/2019/01/21/manual-bean-definitions-in-spring-boot[Manual AutoConfiguration Defintions] are a thing in Spring.
-
-=== Spring Fu
-
-link:https://github.com/rodolphocouto/spring-fu-sample/[other sample].
+The Spring Kotlin Bean DSL was introduced with Spring 5. An excellent resource if you want to migrate from component scan to the new dsl is link:https://blog.frankel.ch/spring-boot-migrating-functional/[Spring Boot, migrating to functional].
 
 === Spring Router DSL
 
 link:https://docs.spring.io/spring/docs/current/spring-framework-reference/languages.html#router-dsl[Spring Router DSL].
 
-=== Kotlin Script Templates
+=== Configuring Spring
 
-link:https://github.com/sdeleuze/kotlin-script-templating[sample project] and link:https://docs.spring.io/spring/docs/current/spring-framework-reference/languages.html#kotlin-script-templates[reference docs].
+link:https://spring.io/blog/2019/01/21/manual-bean-definitions-in-spring-boot[Manual AutoConfiguration Defintions] are a thing in Spring.
+
+==== Spring Fu
+
+link:https://github.com/rodolphocouto/spring-fu-sample/[other sample].
 
 === Spring Testing
 
 link:https://docs.spring.io/spring-boot/docs/current/reference/html/appendix-test-auto-configuration.html[Test Auto-configuration Annotations].
+
+=== Kotlin Script Templates
+
+link:https://github.com/sdeleuze/kotlin-script-templating[sample project] and link:https://docs.spring.io/spring/docs/current/spring-framework-reference/languages.html#kotlin-script-templates[reference docs].
