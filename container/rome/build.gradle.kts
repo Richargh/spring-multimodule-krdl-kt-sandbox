@@ -1,10 +1,10 @@
+import de.richargh.sandbox.spring.multibuild.Deps
 import de.richargh.sandbox.spring.multibuild.testArchive
 
 plugins {
     id("org.springframework.boot")
 
     kotlin("jvm")
-    kotlin("plugin.spring")
 
     // order is important, apply this buildSrc plugin last
     id("de.richargh.sandbox.spring.multibuild")
