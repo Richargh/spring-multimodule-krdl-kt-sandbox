@@ -56,6 +56,12 @@ In our case we wrote a custom buildSrc plugin to define multiple testsets that c
 * The official docs provide a link:https://guides.gradle.org/migrating-build-logic-from-groovy-to-kotlin/[Migration Guide] from Groovy to Kotlin
 * There is also the link:https://docs.gradle.org/current/userguide/kotlin_dsl.html[Gradle Kotlin DSL User Guide] to consider.
 
+=== Plugins
+
+Plugins can modify your build quite a lot. For example they can add tasks or new extensions to a project. They are usually added in the `plugins {}` block of a `build.gradle.kts`. The normal way is to supply an `id("...")`.
+
+If you want an executable jar, you would usually add the application plugin `plugins { id("org.gradle.application") }`. Gradle provides aliases for the common plugin they supply. So `id("org.gradle.application")` becomes `\`application\``. JetBrains provides a different alias for all the kotlin plugins and `id("org.jetbrains.kotlin.jvm")` becomes `kotlin("jvm")`.
+
 == Spring
 
 === Spring Kotlin Bean DSL
