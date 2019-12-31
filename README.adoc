@@ -29,11 +29,13 @@ Gradle built system has two major building blocks
 
 A Gradle build system is made up of one or more projects and each project contains one or more tasks. A project in Gradle is an abstract concept that represents an artifact that needs to be built.
 
-
-
 === Wrapper
 
 Please make sure you have the newest Gradle (>v6) version installed if you run the `gradle wrapper` task.
+
+=== BuildSrc
+
+BuildSrc is a project in the root of your build. Everything written there will be shared by all your build scripts. We can use buildSrc to write our own gradle tasks, plugins or extensions functions that will be available in all `build.gradle.kts`.
 
 === Test
 

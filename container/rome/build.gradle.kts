@@ -22,7 +22,7 @@ dependencies {
     implementation(kotlin("stdlib-jdk8"))
 
     /** Main dependencies **/
-    implementation("org.springframework.fu:spring-fu-kofu:0.2.2")
+    implementation("org.springframework.fu:spring-fu-kofu:${Deps.Spring.kofuVersion}")
     implementation("org.springframework.boot:spring-boot-autoconfigure")
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
