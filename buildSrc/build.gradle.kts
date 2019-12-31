@@ -4,6 +4,10 @@ plugins {
     kotlin("jvm") version "1.3.50"
 }
 
+kotlinDslPluginOptions {
+    experimentalWarning.set(false)
+}
+
 repositories {
     mavenCentral()
 }
