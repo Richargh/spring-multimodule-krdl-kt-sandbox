@@ -7,7 +7,7 @@ plugins {
     kotlin("jvm")
 
     // order is important, apply this buildSrc plugin last
-    id("de.richargh.sandbox.spring.multibuild")
+    id("buildSrc.testsets")
 }
 
 dependencies {

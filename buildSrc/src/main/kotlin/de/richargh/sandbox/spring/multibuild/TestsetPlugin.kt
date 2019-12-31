@@ -10,7 +10,7 @@ import org.gradle.kotlin.dsl.DependencyHandlerScope
 import org.gradle.kotlin.dsl.get
 import org.gradle.kotlin.dsl.register
 
-open class ProjectPlugin: Plugin<Project> {
+open class TestsetPlugin: Plugin<Project> {
 
     private val log = Logging.getLogger(javaClass)
 
