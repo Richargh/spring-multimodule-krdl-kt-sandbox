@@ -36,7 +36,7 @@ Running the test from different category (a) might take a couple of milliseconds
 
 === Unit Test
 
-Unlike Integration Tests, unit tests do have a definition by :
+Unlike Integration Tests, unit tests do have a definition:
 
 [quote, Michael Feathers, 'Defined in link:https://www.artima.com/weblogs/viewpost.jsp?thread=126923[A Set of Unit Testing Rules]']
 ____
@@ -50,6 +50,7 @@ A test is not a unit test if:
 
 Tests that do these things aren't bad. Often they are worth writing, and they can be written in a unit test harness. However, it is important to be able to separate them from true unit tests so that we can keep a set of tests that we can run fast whenever we make our changes.
 ____
+
 
 The idea is really to have fast developer tests that we can run at any time to ensure we have not broken something essential. They should complete in seconds for each component. If we run the tests and are able to get a cup of coffee, they are too slow. For that to work each individual test needs to complete in a couple of milliseconds.
 
