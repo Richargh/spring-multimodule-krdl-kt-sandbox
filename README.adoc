@@ -1,17 +1,21 @@
-= Spring Multimodule Sandbox
-
-This project shows how to use Spring in a multi-module setting.
+= Spring Functional Bean and Configuration Sandbox
 
 *Features*
 
 * Spring Boot
 * Spring Functional Bean Definition Dsl
-* Gradle Kotlin Dsl. We shorten that to kradle though.
+* Spring KoFu (no component-scan)
+* Spring container and component testing
+* Multiple test sets
+* Multiple gradle projects
+* Gradle Kotlin Dsl
 
-The project imagines you want to produce pizza. For that you need a *catalogue* of all possible ingredients and a *factory* with an inventory that can make pizzas. The structure follows the ideas from the link:http://c4model.com/[C4 Model].
+The project imagines you want to produce pizza. For that you need a *catalogue* of all possible ingredients and a *factory* with an inventory that can make pizzas.
 
-* Containers are things that are running, spring containers in our case. Named after italian cities, naturally.
-* Components are collections of classes, that have the same overall purpose.
+The structure follows the ideas from the link:http://c4model.com/[C4 Model].
+
+* Components are collections of classes, that have the same overall purpose. For example catalogue or factory.
+* Containers are things that are running, spring containers in our case. They can contain one or more components. In this project they are named after italian cities, naturally.
 
 == Usage
 
@@ -19,6 +23,52 @@ The project imagines you want to produce pizza. For that you need a *catalogue* 
 * Run individual project `./gradlew :container:rome:bootRun`
 * Test only medium tests `./gradlew mediumTest`
 * List available tasks `./gradlew tasks`
+
+== Testing
+
+Testing is a divisive topics. What is an unit test, what is an integration test, how many tests per category do we need and how much coverage should they have are regular questions in most teams and clear answers are hard to agree on. This project suggests one possible answer with multiple testsets that each contain multiple types of tests. The answer works under the assumption that we want feedback as fast as possible, especially for the business logic, and that we want to support refactoring as much as possible.
+
+=== Integration Test does not mean anything
+
+link:https://reflectoring.io/spring-boot-test/#integration-tests-vs-unit-tests[Reflectoring.io writes] that an integration test can a) cover multiple "units", b) cover multiple layers, or c) test multiple paths through the application.
+
+Running the test from different category (a) might take a couple of milliseconds, b) hundreds of milliseconds and c) might even take seconds. Also the purpose of these three categories is very different. Thus describing something as an integration test is rather unhelpful. We need a better definition to write better tests. Thankfully there is a lot of good material out there.
+
+=== Unit Test
+
+Unlike Integration Tests, unit tests do have a definition by :
+
+[quote, Michael Feathers, 'Defined in link:https://www.artima.com/weblogs/viewpost.jsp?thread=126923[A Set of Unit Testing Rules]']
+____
+A test is not a unit test if:
+
+* It talks to the database
+* It communicates across the network
+* It touches the file system
+* It can't run at the same time as any of your other unit tests
+* You have to do special things to your environment (such as editing config files) to run it.
+
+Tests that do these things aren't bad. Often they are worth writing, and they can be written in a unit test harness. However, it is important to be able to separate them from true unit tests so that we can keep a set of tests that we can run fast whenever we make our changes.
+____
+
+The idea is really to have fast developer tests that we can run at any time to ensure we have not broken something essential. They should complete in seconds for each component. If we run the tests and are able to get a cup of coffee, they are too slow. For that to work each individual test needs to complete in a couple of milliseconds.
+
+In object-oriented languages it is sadly common to write a new unit test every time we write a new class. That couples tests directly to their implementation and is not always advisable. The trigger for writing a new test is "implementing a requirement", as link:https://youtu.be/EZ05e7EMOLM?t=1492[Ian Cooper explains] in his talk about TDD.
+
+=== Test Pyramid
+
+The link:https://martinfowler.com/bliki/TestPyramid.html[Test Automation Pyramid] is a concept mostly attributed to Mike Cohn.
+
+image::img/testing-automation-pyramid.drawio.png[Test Automation Pyramid]
+
+=== Test Sizes
+
+This project is inspired by link:https://testing.googleblog.com/2010/12/test-sizes.html[
+Test Sizes] approach that Simon Stewart developed at Google.
+
+=== Testing vs Checking
+
+=== Test Quadrants
 
 == Gradle
 
@@ -36,7 +86,7 @@ Gradle has a simple link:https://docs.gradle.org/current/userguide/command_line_
 
 === Wrapper
 
-Please make sure you have the newest Gradle (>v6) version installed if you run the `gradle wrapper` task.
+Please make sure you have the newest Gradle (>= v6) version installed if you run the `gradle wrapper` task.
 
 === BuildSrc
 
@@ -56,11 +106,25 @@ In our case we wrote a custom buildSrc plugin to define multiple testsets that c
 * The official docs provide a link:https://guides.gradle.org/migrating-build-logic-from-groovy-to-kotlin/[Migration Guide] from Groovy to Kotlin
 * There is also the link:https://docs.gradle.org/current/userguide/kotlin_dsl.html[Gradle Kotlin DSL User Guide] to consider.
 
+=== Dependencies
+
+// TODO
+
+"api"
+"implementation"
+"testImplementation"
+
 === Plugins
 
 Plugins can modify your build quite a lot. For example they can add tasks or new extensions to a project. They are usually added in the `plugins {}` block of a `build.gradle.kts`. The normal way is to supply an `id("...")`.
 
 If you want an executable jar, you would usually add the application plugin `plugins { id("org.gradle.application") }`. Gradle provides aliases for the common plugin they supply. So `id("org.gradle.application")` becomes `\`application\``. JetBrains provides a different alias for all the kotlin plugins and `id("org.jetbrains.kotlin.jvm")` becomes `kotlin("jvm")`.
+
+The link:https://docs.gradle.org/current/userguide/kotlin_dsl.html#sec:multi_project_builds_applying_plugins[Gradle Kotlin Dsl convention] is to declare plugins and their version in the root project build script without applying them. The subprojects can then apply the plugins on demand but should not specify the version.
+
+=== Scripts
+
+You can create a buildSrc plugin if your `build.gradle.kts` becomes to big. Depending on your use case you can also split your `.kts` into multiple ones and reapply the script with `apply(from = "script-plugin.gradle.kts")`.
 
 == Spring
 
