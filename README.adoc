@@ -36,7 +36,7 @@ Running the test from different category (a) might take a couple of milliseconds
 
 === Unit Test
 
-Unlike Integration Tests, unit tests do have a definition:
+Unlike integration tests, unit tests do have a definition:
 
 [quote, Michael Feathers, 'Defined in link:https://www.artima.com/weblogs/viewpost.jsp?thread=126923[A Set of Unit Testing Rules]']
 ____
@@ -51,17 +51,48 @@ A test is not a unit test if:
 Tests that do these things aren't bad. Often they are worth writing, and they can be written in a unit test harness. However, it is important to be able to separate them from true unit tests so that we can keep a set of tests that we can run fast whenever we make our changes.
 ____
 {empty} +
-{empty} +
 
 The idea is really to have fast developer tests that we can run at any time to ensure we have not broken something essential. They should complete in seconds for each component. If we run the tests and are able to get a cup of coffee, they are too slow. For that to work each individual test needs to complete in a couple of milliseconds.
 
-In object-oriented languages it is sadly common to write a new unit test every time we write a new class. That couples tests directly to their implementation and is not always advisable. The trigger for writing a new test is "implementing a requirement", as link:https://youtu.be/EZ05e7EMOLM?t=1492[Ian Cooper explains] in his talk about TDD.
+In object-oriented languages it is sadly common to write a new unit test every time we write a new class. That couples tests directly to their implementation and is not always advisable. The trigger for writing a new test is "implementing a requirement", as Ian Cooper explains link:https://youtu.be/EZ05e7EMOLM?t=1492[in his talk about TDD].
+
+If you couple writing a test to a new requirement, you'll notice that some requirements require modifying or creating several new classes. At this point another divisive question comes along, "to mock or not to mock?", which brings along another diffuse question, "what is a mock?". Let's see if we can break this down.
+
+Most classes that we create cannot do their job alone. They need collaborators, other classes. That means if we test class A, we also test the collaborator class B. Should we do that or should we replace the collaborator with a link:http://xunitpatterns.com/Test%20Double.html[test double]? There are several variations of a test double with different intends.
+
+[source,kotlin]
+----
+class Car( // <1>
+    private val engine: Engine){ // <2>
+
+    val location: Location // <3>
+
+    fun driveTo(location: Location) // <4>
+}
+
+interface Engine {
+    val speed: Speed // <5>
+    fun accelerateTo(speed: Speed) // <6>
+    // and so on
+}
+----
+<1> system-under-test (SUT) or testling
+<2> collaborator
+<3> direct output
+<4> behavior to test
+<5> indirect input of testling
+<6> indirect output of testling
+
+In his book, link:https://leanpub.com/wewut[Working Effectively with Unit Tests] divides unit tests into social and solitary. Social unit tests can
 
 === Test Pyramid
 
 The link:https://martinfowler.com/bliki/TestPyramid.html[Test Automation Pyramid] is a concept mostly attributed to Mike Cohn.
 
 image::img/testing-automation-pyramid.drawio.png[Test Automation Pyramid]
+
+// integration tests are a scam
+// why most unit testing is a waste
 
 === Test Sizes
 
@@ -71,6 +102,8 @@ Test Sizes] approach that Simon Stewart developed at Google.
 === Testing vs Checking
 
 === Test Quadrants
+
+=== Test-induced Design Damage
 
 == Gradle
 
