@@ -6,8 +6,9 @@ plugins {
 
     kotlin("jvm")
 
-    // order is important, apply this buildSrc plugin last
+    // order is important, apply these plugins last
     id("buildSrc.testsets")
+    id("buildSrc.testarchive")
 }
 
 dependencies {

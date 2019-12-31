@@ -4,7 +4,6 @@ import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.logging.Logging
 import org.gradle.api.tasks.SourceSetContainer
-import org.gradle.api.tasks.bundling.Jar
 import org.gradle.api.tasks.testing.Test
 import org.gradle.kotlin.dsl.DependencyHandlerScope
 import org.gradle.kotlin.dsl.get
@@ -15,37 +14,14 @@ open class TestsetPlugin: Plugin<Project> {
     private val log = Logging.getLogger(javaClass)
 
     override fun apply(project: Project) {
-        project.registerTestArchive()
-
-        project.createTestset("mediumTest", "test")
-        project.createTestset("largeTest", "mediumTest")
+        project.createTestset("mediumTest", mustRunAfter = "test")
+        project.createTestset("largeTest", mustRunAfter = "mediumTest")
     }
 
-    private fun Project.registerTestArchive() {
+    private fun Project.createTestset(testset: String, mustRunAfter: String) {
         val sourceSets = extensions.findByType(SourceSetContainer::class.java)
         if (sourceSets == null) {
             log.error("Couldn't find source sets in $name")
-        } else {
-            configurations.register(testArchive) {
-                extendsFrom(configurations["testCompile"])
-            }
-
-            tasks.register<Jar>(name = "jarTest") {
-                from(sourceSets["test"].output)
-                description = "create a jar from the test source set"
-                archiveClassifier.set("test")
-            }
-
-            artifacts {
-                add(testArchive, tasks.getByName("jarTest"))
-            }
-        }
-    }
-
-    private fun Project.createTestset(testset: String, mustRunAfterTask: String) {
-        val sourceSets = extensions.findByType(SourceSetContainer::class.java)
-        if (sourceSets == null) {
-            logger.lifecycle("Couldn't find source sets in $name")
         } else {
             sourceSets.create(testset) {
                 compileClasspath += sourceSets["main"].output + configurations["testRuntimeClasspath"]
@@ -57,7 +33,7 @@ open class TestsetPlugin: Plugin<Project> {
                 group = "verification"
                 testClassesDirs = sourceSets[testset].output.classesDirs
                 classpath = sourceSets[testset].runtimeClasspath
-                mustRunAfter(tasks[mustRunAfterTask])
+                mustRunAfter(tasks[mustRunAfter])
             }
 
             tasks.named("check") {
@@ -67,8 +43,8 @@ open class TestsetPlugin: Plugin<Project> {
     }
 }
 
-fun DependencyHandlerScope.mediumTestImplementation(dependencyNotation: Any) = "mediumTestImplementation"(dependencyNotation)
+fun DependencyHandlerScope.mediumTestImplementation(dependencyNotation: Any) =
+        "mediumTestImplementation"(dependencyNotation)
 
-fun DependencyHandlerScope.largeTestImplementation(dependencyNotation: Any) = "largeTestImplementation"(dependencyNotation)
-
-const val testArchive = "testArchive"
+fun DependencyHandlerScope.largeTestImplementation(dependencyNotation: Any) =
+        "largeTestImplementation"(dependencyNotation)
