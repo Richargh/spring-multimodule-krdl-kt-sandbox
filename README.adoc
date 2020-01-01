@@ -202,6 +202,7 @@ This project is inspired by link:https://testing.googleblog.com/2010/12/test-siz
 
 [options="header,footer"]
 |===
+
 | Feature
 | Small
 | Medium
