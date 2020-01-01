@@ -150,6 +150,18 @@ If you couple writing a test to a new requirement, you'll notice that some requi
 
 Most classes that we create cannot do their job alone. They need collaborators, other classes. That means if we test a class, make it a system-under-test (SUT), we also test the collaborator. Should we do that or should we replace the collaborator with a link:http://xunitpatterns.com/Test%20Double.html[test double]? To answer that question with a healthy dose of "it depends" we need to first look at the several variations of a test double with their intends. It's time for some code.
 
+[NOTE]
+====
+An admonition block may contain complex content.
+
+[source,kotlin]
+----
+class Car()
+----
+
+Another paragraph.
+====
+
 [source,kotlin]
 ----
 class Car( // <1>
@@ -196,3 +208,11 @@ Test Sizes] approach that Simon Stewart developed at Google.
 === Test Quadrants
 
 === Test-induced Design Damage
+
+=== Role of QA
+
+[quote, Shape Up by Basecamp, 'Defined in the free book link:https://basecamp.com/shapeup/3.5-chapter-13#qa-is-for-the-edges[Shape Up]']
+____
+Therefore we think of QA as a level-up, not a gate or a check-point that all work must go through. We’re much better off with QA than without it. But we don’t depend on QA to ship quality features that work as they should.
+____
+{empty} +
