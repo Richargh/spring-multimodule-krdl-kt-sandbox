@@ -148,7 +148,7 @@ In object-oriented languages it is sadly common to write a new unit test every t
 
 If you couple writing a test to a new requirement, you'll notice that some requirements require modifying or creating several new classes. At this point another divisive question comes along, "to mock or not to mock?", which brings along another diffuse question, "what is a mock?". Let's see if we can break this down.
 
-Most classes that we create cannot do their job alone. They need peers, other classes for example. That means if we test a class, make it a system-under-test (SUT), we also test the peer(s). Should we do that or should we replace the peer with a link:http://xunitpatterns.com/Test%20Double.html[test double]?
+Most classes that we create cannot do their job alone. They need peers, other classes for example. That means if we test a class, make it a system-under-test (SUT), we also test the peer(s). If we do not want to do that, we can replace the peer with a link:http://xunitpatterns.com/Test%20Double.html[test double],
 
 [NOTE]
 ====
@@ -182,6 +182,7 @@ Much of this text has been inspired by two blog posts. Martin Fowler's link:http
 ====
 
 
+
 In his book, link:https://leanpub.com/wewut[Working Effectively with Unit Tests] divides unit tests into social and solitary. Social unit tests can
 
 
@@ -197,8 +198,56 @@ image::img/testing-automation-pyramid.drawio.png[Test Automation Pyramid]
 
 === Test Sizes
 
-This project is inspired by link:https://testing.googleblog.com/2010/12/test-sizes.html[
-Test Sizes] approach that Simon Stewart developed at Google.
+This project is inspired by link:https://testing.googleblog.com/2010/12/test-sizes.html[Test Sizes] approach that Simon Stewart developed at Google.
+
+[options="header,footer"]
+|===
+| Feature
+| Small
+| Medium
+| Large
+
+| Network access
+| No
+| localhost only
+| Yes
+
+| Database
+| No
+| Yes
+| Yes
+
+| File system access
+| No
+| Yes
+| Yes
+
+| Use external systems
+| No
+| Discouraged
+| Yes
+
+| Multiple threads
+| No
+| Yes
+| Yes
+
+| Sleep statements
+| No
+| Yes
+| Yes
+
+| System properties
+| No
+| Yes
+| Yes
+
+| Time limit (seconds)
+| 60
+| 300
+| 900+
+
+|===
 
 === Testing vs Checking
 
