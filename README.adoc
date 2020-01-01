@@ -200,7 +200,7 @@ image::img/testing-automation-pyramid.drawio.png[Test Automation Pyramid]
 
 This project is inspired by link:https://testing.googleblog.com/2010/12/test-sizes.html[Test Sizes] approach that Simon Stewart developed at Google.
 
-[options="header,footer"]
+[cols="4*", options="header,footer"]
 |===
 
 | Feature
