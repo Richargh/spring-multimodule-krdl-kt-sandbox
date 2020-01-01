@@ -152,22 +152,33 @@ Most classes that we create cannot do their job alone. They need peers, other cl
 
 [NOTE]
 ====
-*A Test Double is the name for a family of "test-specific equivalents" of real objects.* We use them when the system-under-test (SUT) is hard to test. Depending on how we *use* the double we give it a different name to make our intent clear. The book link:https://www.amazon.com/xUnit-Test-Patterns-Refactoring-Code-dp-0131495054/dp/0131495054/[XUnit Test Patterns] declares the variations of link:http://xunitpatterns.com/Test%20Double.html[Test Doubles]:
+*A link:http://xunitpatterns.com/Test%20Double.html[Test Double] is the name for a family of "test-specific equivalents" of real objects.* We use them when the system-under-test (SUT) is hard to test. Depending on how we *use* the double we give it a different name to make our intent clear. The book link:https://www.amazon.com/xUnit-Test-Patterns-Refactoring-Code-dp-0131495054/dp/0131495054/[XUnit Test Patterns] declares the following variations:
 
 image::img/test-double.drawio.png[Test Double Hierarchy]
 
 * *Dummys* are passed to a SUT if the method signature requires an object but neither the SUT, nor the test uses the dummy. The dummy can be a null object reference, or an object that throws an exception if its methods are called. That means an exception will be thrown in the test if the code changes and the dummy is no longer a dummy.
 * *Stubs* provide canned answers to the tests. They allow us to control the indirect input to the SUT.
 * *Spies* are like stubs but they also observe and record the interactions that the SUT has with the spy. Our test can then verify the right interactions happened.
-* *Mocks* are like spies but pre-programmed to verify the right interactions happened.
+* *Mocks* are like spies but pre-programmed to verify the right interactions happened. Informally many people say mock, when they actually mean test double. Sometimes losing the specificity is ok, sometimes it makes names and the purpose of the test unclear.
 * *Fakes* are unlike the other doubles and have actual working implementations. For test-purposes they take shortcuts that make them unsuitable for production.
-* Another variation not mentioned in XUnit Test Patterns are *Proxies*. They are like spies but do not have canned answers and instead delegate to the real implementation.
+* *Proxies* are a variation not mentioned in XUnit Test Patterns. They are like spies but do not have canned answers and instead delegate to the real implementation.
 
 image::img/test-double-example.drawio.png[Test Double Example]
 
-Informally many people say mock, when they actually mean test double. Sometimes losing the specificity is ok, sometimes it makes the purpose of the test unclear.
+All of these test doubles can be created without a mocking framework and I often prefer to do so. I find that mocking frameworks often hide bad design, inhibit refactoring and mock the wrong things.
 
-In practice I seldom use stubs or spies and almost never mocks. 
+First, an interface that is too wide with too many methods or a class that has lots of constructor arguments becomes easy to instantiate with mocking frameworks. This can happen over time, I do not notice because the framework hides it and the bad design thrives.
+
+Second, it's very easy to create test doubles with mocking frameworks and give them behavior. So we tend to do it in all places that are convenient. When the interface of the doubled production code now changes we have to update all places where we mocked the behavior or decide not to refactor. If we had used a shared hand-written stub we could have made the refactoring easy by using tricks like inlining methods or similar.
+
+Third is when things like repositories, value objects or domain entities are mocked.
+
+* Repositories behave like collections and have methods to add, delete as well as retrieve entities and are usually backed by a database. A hand-written fake that uses an hashmap for storage, can be maintained in one place and shared with all tests is a much better helper than writing `every { domainRepo.get(any()) }.returns(domainObject)` for all application layer tests.
+* Value objects link:https://www.amazon.com/-/de/dp/0321503627/[should never be mocked] and that would be strange for entities as well. If an object is difficult to instantiate, I write an explicit builder instead. Builders can also hide bad class design, but at least the builder then has explicit code and lots of lines of code that tell me to refactor.
+
+Despite all this I think mocking frameworks do have their place in two cases. Sometimes I need to stub a class and cannot change the class to an interface because it's not my code. At other times I do want a mock and the framework dsl allows me to verify interactions within the the scope of my test. I find these mocks to be most useful at the boundary of my component where I want to verify the code I wrote interacts correctly with the code someone else wrote. Sometimes it makes more sense to use a Spy though because the behavior I want to verify cannot be represented by the mock framework dsl.
+
+Also, due to their reflective nature, it takes mocking frameworks like mockito or mockk about 1000 times longer to instantiate, configure and execute a method on a simple object like `open class DeepStub { open fun answer()= 42; val map = ConcurrentHashMap<String, String>()}`. Granted we only go from 0.0004 ms for constructor invocation to 0.2 ms (mockito: `val deep = mock(DeepStub::class.java); `when`(deep.answer()).thenReturn(42); deep.answer()`) or 0.3 ms (mockk: `val deep = mockk<DeepStub>(); every { deep.answer() }.returns(42); deep.answer()`) and that is often insignificant.
 
 Martin Fowler also has an excellent blog post called link:https://martinfowler.com/articles/mocksArentStubs.html[Mocks aren't Stubs] as does Robert Martin link:https://blog.cleancoder.com/uncle-bob/2014/05/14/TheLittleMocker.html[The Little Mocker].
 ====
