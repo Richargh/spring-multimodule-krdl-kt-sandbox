@@ -178,9 +178,7 @@ Third is when things like repositories, value objects or domain entities are moc
 
 Despite all this I think mocking frameworks do have their place in two cases. Sometimes I need to stub a class and cannot change the class to an interface because it's not my code. At other times I do want a mock and the framework dsl allows me to verify interactions within the the scope of my test. I find these mocks to be most useful at the boundary of my component where I want to verify the code I wrote interacts correctly with the code someone else wrote. Sometimes it makes more sense to use a Spy though because the behavior I want to verify cannot be represented by the mock framework dsl.
 
-Also, due to their reflective nature, it takes mocking frameworks like mockito or mockk about 1000 times longer to instantiate, configure and execute a method on a simple object like `open class DeepStub { open fun answer()= 42; val map = ConcurrentHashMap<String, String>()}`. Granted we only go from 0.0004 ms for constructor invocation to 0.2 ms (mockito: `val deep = mock(DeepStub::class.java); `when`(deep.answer()).thenReturn(42); deep.answer()`) or 0.3 ms (mockk: `val deep = mockk<DeepStub>(); every { deep.answer() }.returns(42); deep.answer()`) and that is often insignificant.
-
-Martin Fowler also has an excellent blog post called link:https://martinfowler.com/articles/mocksArentStubs.html[Mocks aren't Stubs] as does Robert Martin link:https://blog.cleancoder.com/uncle-bob/2014/05/14/TheLittleMocker.html[The Little Mocker].
+Much of this text has been inspired by two blog posts. Martin Fowler's link:https://martinfowler.com/articles/mocksArentStubs.html[Mocks aren't Stubs] and Robert Martin's link:https://blog.cleancoder.com/uncle-bob/2014/05/14/TheLittleMocker.html[The Little Mocker].
 ====
 
 
