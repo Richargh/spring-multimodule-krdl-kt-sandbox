@@ -126,8 +126,6 @@ Running the test from different category (a) might take a couple of milliseconds
 
 === Unit Test
 
-Unlike integration tests, unit tests do have a definition:
-
 [quote, Michael Feathers, 'Defined in link:https://www.artima.com/weblogs/viewpost.jsp?thread=126923[A Set of Unit Testing Rules]']
 ____
 A test is not a unit test if:
@@ -146,7 +144,7 @@ The idea is really to have fast developer tests that we can run at any time to e
 
 In object-oriented languages it is sadly common to write a new unit test every time we write a new class. That couples tests directly to their implementation and is not always advisable. The trigger for writing a new test is "implementing a requirement", as Ian Cooper explains link:https://youtu.be/EZ05e7EMOLM?t=1492[in his talk about TDD].
 
-If you couple writing a test to a new requirement, you'll notice that some requirements require modifying or creating several new classes. At this point another divisive question comes along, "to mock or not to mock?", which brings along another diffuse question, "what is a mock?". Let's see if we can break this down.
+If you couple writing a test to a new requirement, you'll notice that some requirements require modifying or creating several new classes. At this point another divisive question comes along, "to mock or not to mock?", which brings along another question, "what is a mock?". Let's see if we can break this down.
 
 Most classes that we create cannot do their job alone. They need peers, other classes for example. That means if we test a class, make it a system-under-test (SUT), we also test the peer(s). If we do not want to do that, we can replace the peer with a link:http://xunitpatterns.com/Test%20Double.html[test double],
 
@@ -198,7 +196,7 @@ image::img/testing-automation-pyramid.drawio.png[Test Automation Pyramid]
 
 === Test Sizes
 
-This project is inspired by link:https://testing.googleblog.com/2010/12/test-sizes.html[Test Sizes] approach that Simon Stewart developed at Google.
+In 2010 Google did not use fuzzily defined test names. What they instead used was the concept of link:https://testing.googleblog.com/2010/12/test-sizes.html[Test Sizes]. They grouped tests into _small_, _medium_ and _large_ depending on which features it is allowed to use.
 
 [cols="4*", options="header,footer"]
 |===
@@ -249,6 +247,10 @@ This project is inspired by link:https://testing.googleblog.com/2010/12/test-siz
 | 900+
 
 |===
+
+The matrix makes it very clear what is allowed to be used in the category and what the total time limit is. They used annotation to classify the tests. That made it possible to police the limits by installing a link:https://docs.oracle.com/javase/6/docs/api/java/lang/SecurityManager.html[security manager] that disallows certain activities or with tools such as link:https://www.archunit.org/[ArchUnit].
+
+A unit test is clearly a small test. Interestingly most other test types can fit into all three categories. For example, a UI test can be a small test if we only test the html or json rendering. It can be a medium test if we only create a web context and it can be a large test if we require the whole spring application to run.
 
 === Testing vs Checking
 
