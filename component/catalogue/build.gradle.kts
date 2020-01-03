@@ -28,8 +28,7 @@ dependencies {
     /** Main dependencies **/
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
-
-    runtimeOnly("com.h2database:h2:1.4.200") // See https://github.com/spring-projects/spring-boot/issues/18593 and https://github.com/h2database/h2database/issues/1841
+    implementation("org.springframework.boot:spring-boot-starter-data-mongodb")
     runtimeOnly("org.springframework.boot:spring-boot-devtools")
 
     /** Test dependencies **/

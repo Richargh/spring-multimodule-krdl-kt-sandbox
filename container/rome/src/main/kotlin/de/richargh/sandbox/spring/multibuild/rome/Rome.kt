@@ -14,6 +14,12 @@ import org.springframework.context.annotation.PropertySource
 import org.springframework.fu.kofu.application
 import org.springframework.fu.kofu.webmvc.mustache
 import org.springframework.fu.kofu.webmvc.webMvc
+import com.mongodb.client.MongoClients
+import de.richargh.sandbox.spring.multibuild.catalogue.domain.CatalogueEntry
+import org.springframework.data.mongodb.core.MongoTemplate
+import org.springframework.data.mongodb.core.MongoOperations
+import org.springframework.data.mongodb.core.query.Criteria.where
+import org.springframework.data.mongodb.core.query.Query
 
 @PropertySource("classpath:application-rome.properties")
 class Rome
@@ -32,7 +38,7 @@ val app = application(WebApplicationType.SERVLET) {
     }
 
     webMvc {
-        port = 8081
+        port = 8080
         router {
             catalogueRoutes(CatalogueHandler())
             factoryRoutes(FactoryHandler())
@@ -46,5 +52,8 @@ val app = application(WebApplicationType.SERVLET) {
 }
 
 fun main(args: Array<String>) {
+    val mongoOps = MongoTemplate(MongoClients.create(), "database")
+    mongoOps.insert<Any>(CatalogueEntry("Joe"))
+    println(mongoOps.findOne(Query(where("name").`is`("Joe")), CatalogueEntry::class.java))
     app.run(args)
 }

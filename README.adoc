@@ -1,4 +1,4 @@
-= Spring Functional Bean and Configuration Sandbox
+= Spring Functional Bean and Kofu Sandbox
 
 *Features*
 
@@ -26,6 +26,15 @@ The structure follows the ideas from the link:http://c4model.com/[C4 Model].
 * Test only medium tests `./gradlew mediumTest`
 * List available tasks `./gradlew tasks`
 
+
+== Mongo
+
+Requires mongo to run locally. Please retrieve mongo via docker.
+
+* To start mongo type `docker run -p 27017:27017 -d mongo`
+* Check the container id and that mongo is running via `docker ps`
+* Lets say mongos id is 7f93f02e3a48, then you can view the logs via `docker logs 7f9` or `docker logs -f 7f9`
+*
 
 
 == Gradle
@@ -100,9 +109,13 @@ link:https://docs.spring.io/spring/docs/current/spring-framework-reference/langu
 
 link:https://spring.io/blog/2019/01/21/manual-bean-definitions-in-spring-boot[Manual AutoConfiguration Defintions] are a thing in Spring.
 
-==== Spring Fu
+==== Kofu
 
-link:https://github.com/rodolphocouto/spring-fu-sample/[other sample].
+According to it's creator link:https://github.com/sdeleuze[Sebastien Deleuze] Kofu is a minimalist, efficient and explicit configuration model for Spring Boot using a Kotlin DSL. One of the best talks about actualling using Kofu is link:https://youtu.be/kL_xTXXjEeE?t=1361[Spring Boot with Kotlin, Kofu and Coroutines by Sébastien Deleuze @ Spring I/O 2019].
+
+Kofu examples projects have been created by:
+* Sebastien Deleuze with link:https://github.com/spring-projects-experimental/spring-fu/tree/master/samples[Several Kofu Samples]
+* Rodolpho Couto with link:https://github.com/rodolphocouto/spring-fu-sample/[WebFlux and Coroutines]
 
 === Spring Testing
 
