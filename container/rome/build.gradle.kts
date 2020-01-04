@@ -27,7 +27,11 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-autoconfigure")
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
-    implementation("org.springframework.boot:spring-boot-starter-data-mongodb")
+    implementation("org.springframework.boot:spring-boot-starter-jdbc")
+    implementation("org.jdbi:jdbi3-spring4:3.12.0")
+    implementation("org.jdbi:jdbi3-sqlobject:3.12.0")
+
+    runtimeOnly("com.h2database:h2:1.4.199")
     runtimeOnly("org.springframework.boot:spring-boot-devtools")
 
     /** Test dependencies **/

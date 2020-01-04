@@ -5,8 +5,5 @@ import de.richargh.sandbox.spring.multibuild.factory.web.factoryRoutes
 import org.springframework.context.support.beans
 import org.springframework.web.servlet.function.router
 
-fun factoryBeans() = beans {
-    bean {
-        router { factoryRoutes(FactoryHandler()) }
-    }
+fun factoryAppBeans() = beans {
 }
